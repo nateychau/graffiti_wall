@@ -1,0 +1,8 @@
+#canvas{
+  background-color: aquamarine;
+}
+
+.main{
+  display: flex; 
+  justify-content: center;
+}
