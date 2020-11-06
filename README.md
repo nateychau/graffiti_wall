@@ -1,0 +1,1 @@
+Submission for MB JavaScript Hacks: Graffiti Wall
