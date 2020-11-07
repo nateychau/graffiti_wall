@@ -13,22 +13,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
     ctx.moveTo(coord.x, coord.y);
   });
 
-  canvas.addEventListener("mousemove", (e) => {
+  document.addEventListener("mousemove", (e) => {
     if (!drawing) return;
 
-    // ctx.clearRect(0, 0, canvas.width, canvas.height)
-    debugger;
-    ctx.beginPath();
+    coord = Util.getPosition(e, canvas);
+
     ctx.lineWidth = 5;
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
 
-    coord = Util.getPosition(e, canvas);
     ctx.lineTo(coord.x, coord.y);
     ctx.stroke();
   });
 
-  canvas.addEventListener("mouseup", (e) => {
+  document.addEventListener("mouseup", (e) => {
     if (!drawing) return;
 
     drawing = false;

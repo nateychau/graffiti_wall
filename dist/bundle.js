@@ -99,26 +99,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var drawing = false;
 var coord;
-window.addEventListener('DOMContentLoaded', function (event) {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-  canvas.addEventListener('mousedown', function (e) {
+window.addEventListener("DOMContentLoaded", function (event) {
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  canvas.addEventListener("mousedown", function (e) {
     drawing = true;
     coord = _util_js__WEBPACK_IMPORTED_MODULE_0__["getPosition"](e, canvas); //get start point for line
-  });
-  canvas.addEventListener('mousemove', function (e) {
-    if (!drawing) return; // ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = 'black';
     ctx.moveTo(coord.x, coord.y);
+  });
+  document.addEventListener("mousemove", function (e) {
+    if (!drawing) return;
     coord = _util_js__WEBPACK_IMPORTED_MODULE_0__["getPosition"](e, canvas);
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "black";
     ctx.lineTo(coord.x, coord.y);
     ctx.stroke();
   });
-  canvas.addEventListener('mouseup', function (e) {
+  document.addEventListener("mouseup", function (e) {
     if (!drawing) return;
     drawing = false;
   });
@@ -130,18 +129,22 @@ window.addEventListener('DOMContentLoaded', function (event) {
 /*!*********************!*\
   !*** ./src/util.js ***!
   \*********************/
-/*! exports provided: getPosition */
+/*! exports provided: getPosition, isOutOfBound */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosition", function() { return getPosition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOutOfBound", function() { return isOutOfBound; });
 var getPosition = function getPosition(event, canvas) {
   var bound = canvas.getBoundingClientRect();
   return {
     x: (event.clientX - bound.left) / bound.width * canvas.width,
     y: (event.clientY - bound.top) / bound.height * canvas.height
   };
+};
+var isOutOfBound = function isOutOfBound(coord, canvas) {
+  return coord.x > canvas.width || coord.x < 0 || coord.y > canvas.height || coord.y < 0;
 };
 
 /***/ })
