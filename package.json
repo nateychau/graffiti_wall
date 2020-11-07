@@ -1,0 +1,29 @@
+{
+  "name": "graffiti_wall",
+  "version": "1.0.0",
+  "description": "Submission for MB JavaScript Hacks: Graffiti Wall",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nateychau/graffiti_wall.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nateychau/graffiti_wall/issues"
+  },
+  "homepage": "https://github.com/nateychau/graffiti_wall#readme",
+  "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
