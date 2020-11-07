@@ -1,5 +1,7 @@
-export const getPosition = (event, canvas) => { 
-  let x = event.clientX - canvas.offsetLeft; 
-  let y = event.clientY - canvas.offsetTop; 
-  return {x, y}
-}
+export const getPosition = (event, canvas) => {
+  const bound = canvas.getBoundingClientRect();
+  return {
+    x: ((event.clientX - bound.left) / bound.width) * canvas.width,
+    y: ((event.clientY - bound.top) / bound.height) * canvas.height,
+  };
+};
