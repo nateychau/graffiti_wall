@@ -15,10 +15,12 @@ export const isOutOfBound = function (coord, canvas) {
   );
 };
 
-export const sprayParticle = function (radius) {
-  const theta = Math.random() * Math.PI * 2;
-  const r = Math.random() * radius;
-  const x = r * Math.cos(theta);
-  const y = r * Math.sin(theta);
+//Use Box–Muller transform to create rnd particle pairs with guassian distribution
+export const rndSprayParticle = function (sigma) {
+  const u1 = Math.random();
+  const u2 = Math.random();
+  const mag = sigma * Math.sqrt(-2 * Math.log(u1));
+  const x = mag * Math.cos(2 * Math.PI * u2);
+  const y = mag * Math.sin(2 * Math.PI * u2);
   return { x, y };
 };
