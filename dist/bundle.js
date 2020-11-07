@@ -99,26 +99,55 @@ __webpack_require__.r(__webpack_exports__);
 
 var drawing = false;
 var coord;
+var brushSize = 5;
+var brushSizeRate = 0.1;
+var pauseTime = 0;
+var xLast;
+var yLast;
+var spraySize = 10;
+var HOLD_THRESHOLD = 50;
+var SPRAY_DENSITY = 50;
+var sprayId = 0;
+var onHold = false;
 window.addEventListener("DOMContentLoaded", function (event) {
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
+
+  var spray = function spray() {
+    for (var i = 0; i < SPRAY_DENSITY; i++) {
+      var noise = _util_js__WEBPACK_IMPORTED_MODULE_0__["rndSprayParticle"](spraySize);
+      var x = coord.x + noise.x;
+      var y = coord.y + noise.y;
+      ctx.fillRect(x, y, 1, 1);
+      console.log("count");
+    }
+  };
+
   canvas.addEventListener("mousedown", function (e) {
     drawing = true;
     coord = _util_js__WEBPACK_IMPORTED_MODULE_0__["getPosition"](e, canvas); //get start point for line
 
     ctx.moveTo(coord.x, coord.y);
+    xLast = coord.x;
+    yLast = coord.y;
+    ctx.lineWidth = 5;
+    spray();
   });
   document.addEventListener("mousemove", function (e) {
     if (!drawing) return;
+    clearInterval(sprayId);
     coord = _util_js__WEBPACK_IMPORTED_MODULE_0__["getPosition"](e, canvas);
-    ctx.lineWidth = 5;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "black";
-    ctx.lineTo(coord.x, coord.y);
-    ctx.stroke();
+    spray(); // const dx = coord.x - xLast;
+    // const dy = coord.y - yLast;
+
+    sprayId = setInterval(spray, 20); // ctx.lineCap = "round";
+    // ctx.strokeStyle = "black";
+    // ctx.lineTo(coord.x, coord.y);
+    // ctx.stroke();
   });
   document.addEventListener("mouseup", function (e) {
     if (!drawing) return;
+    clearInterval(sprayId);
     drawing = false;
   });
 });
@@ -129,13 +158,14 @@ window.addEventListener("DOMContentLoaded", function (event) {
 /*!*********************!*\
   !*** ./src/util.js ***!
   \*********************/
-/*! exports provided: getPosition, isOutOfBound */
+/*! exports provided: getPosition, isOutOfBound, rndSprayParticle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosition", function() { return getPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOutOfBound", function() { return isOutOfBound; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rndSprayParticle", function() { return rndSprayParticle; });
 var getPosition = function getPosition(event, canvas) {
   var bound = canvas.getBoundingClientRect();
   return {
@@ -145,6 +175,18 @@ var getPosition = function getPosition(event, canvas) {
 };
 var isOutOfBound = function isOutOfBound(coord, canvas) {
   return coord.x > canvas.width || coord.x < 0 || coord.y > canvas.height || coord.y < 0;
+}; //Use Box–Muller transform to create rnd particle pairs with guassian distribution
+
+var rndSprayParticle = function rndSprayParticle(sigma) {
+  var u1 = Math.random();
+  var u2 = Math.random();
+  var mag = sigma * Math.sqrt(-2 * Math.log(u1));
+  var x = mag * Math.cos(2 * Math.PI * u2);
+  var y = mag * Math.sin(2 * Math.PI * u2);
+  return {
+    x: x,
+    y: y
+  };
 };
 
 /***/ })
