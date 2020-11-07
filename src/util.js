@@ -14,3 +14,11 @@ export const isOutOfBound = function (coord, canvas) {
     coord.y < 0
   );
 };
+
+export const sprayParticle = function (radius) {
+  const theta = Math.random() * Math.PI * 2;
+  const r = Math.random() * radius;
+  const x = r * Math.cos(theta);
+  const y = r * Math.sin(theta);
+  return { x, y };
+};
