@@ -15,14 +15,22 @@ let onHold = false;
 
 window.addEventListener("DOMContentLoaded", (event) => {
   const canvas = document.getElementById("canvas");
+  const colorPicker = new iro.ColorPicker('#picker');
   const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = colorPicker.color.hexString;
+  colorPicker.on('color:change', function(color){
+    ctx.fillStyle = color.hexString;
+  })
+
+
   const spray = function () {
     for (let i = 0; i < SPRAY_DENSITY; i++) {
       const noise = Util.rndSprayParticle(spraySize);
       const x = coord.x + noise.x;
       const y = coord.y + noise.y;
       ctx.fillRect(x, y, 1, 1);
-      console.log("count");
+      // console.log("count");
     }
   };
 

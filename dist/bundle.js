@@ -111,15 +111,19 @@ var sprayId = 0;
 var onHold = false;
 window.addEventListener("DOMContentLoaded", function (event) {
   var canvas = document.getElementById("canvas");
+  var colorPicker = new iro.ColorPicker('#picker');
   var ctx = canvas.getContext("2d");
+  ctx.fillStyle = colorPicker.color.hexString;
+  colorPicker.on('color:change', function (color) {
+    ctx.fillStyle = color.hexString;
+  });
 
   var spray = function spray() {
     for (var i = 0; i < SPRAY_DENSITY; i++) {
       var noise = _util_js__WEBPACK_IMPORTED_MODULE_0__["rndSprayParticle"](spraySize);
       var x = coord.x + noise.x;
       var y = coord.y + noise.y;
-      ctx.fillRect(x, y, 1, 1);
-      console.log("count");
+      ctx.fillRect(x, y, 1, 1); // console.log("count");
     }
   };
 
