@@ -76,7 +76,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     spraySize = e.target.value / 8;
     SPRAY_DENSITY_MEDIAN = 2 * Math.PI * spraySize ** 2;
     SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
-    console.log("spraysize" + spraySize);
   };
 
   //Density is controlled by a range input slider.
@@ -85,7 +84,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   densitySlider.oninput = function (e) {
     SPRAY_DENSITY_RATIO = e.target.value / 50;
     SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
-    console.log("spraydensity" + SPRAY_DENSITY);
   };
 
   //-----------------------
@@ -97,6 +95,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       const y = coord.y + noise.y;
       ctx.fillRect(x, y, 1, 1);
     }
+    console.log("count");
   };
 
   canvas.addEventListener("mousedown", (e) => {
@@ -106,7 +105,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     xLast = coord.x;
     yLast = coord.y;
     ctx.lineWidth = 5;
-    spray();
+
+    sprayId = setInterval(spray, 20);
+
     if (playSound) {
       spraySound.play();
     }
