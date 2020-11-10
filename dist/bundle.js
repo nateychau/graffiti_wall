@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
 
 var drawing = false;
+var playSound = true;
 var coord;
 var brushSize = 5;
 var brushSizeRate = 0.1;
@@ -111,7 +112,66 @@ var sprayId = 0;
 var onHold = false;
 window.addEventListener("DOMContentLoaded", function (event) {
   var canvas = document.getElementById("canvas");
-  var ctx = canvas.getContext("2d");
+  var ctx = canvas.getContext("2d"); //---------Spray sound properties--------------
+
+  var spraySound = new Audio();
+  spraySound.src = '../dist/assets/spray_sound.mp3';
+  spraySound.loop = true;
+  spraySound.volume = 0.45; //Event listener for semi-gapless looping
+
+  spraySound.addEventListener('timeupdate', function (e) {
+    var buffer = .5;
+
+    if (playSound && !this.paused && this.currentTime > this.duration - buffer) {
+      this.currentTime = 1;
+      this.play();
+    }
+  }); //Audio on/off controls
+
+  var soundButton = document.getElementById("sound-icon");
+  soundButton.addEventListener('click', function () {
+    if (playSound) {
+      this.classList.remove('fa-volume-up');
+      this.classList.add('fa-volume-mute');
+      playSound = false;
+    } else {
+      this.classList.remove('fa-volume-mute');
+      this.classList.add('fa-volume-up');
+      playSound = true;
+    }
+  }); //-----------Restart functionality-------------------
+
+  var trashButton = document.getElementById("trash-icon");
+  trashButton.addEventListener('click', function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //!!add additional logic for resetting background
+  }); //------------Color picker related set up--------------
+
+  var colorPicker = new iro.ColorPicker('#picker', {
+    width: 100
+  }); //event listener for color picker
+
+  ctx.fillStyle = colorPicker.color.hexString;
+  colorPicker.on('color:change', function (color) {
+    ctx.fillStyle = color.hexString;
+  }); //-------------------Slider event listeners-----------------------
+  //Density is controlled by a range input slider. 
+  //(We can adjust min and max values of the slider, currently 1-100, default 50)
+
+  var densitySlider = document.getElementById("density-slider");
+
+  densitySlider.oninput = function (e) {
+    SPRAY_DENSITY = e.target.value;
+    console.log(SPRAY_DENSITY);
+  }; //Reticle slider handles need to be tweaked
+
+
+  var reticleSlider = document.getElementById("reticle-slider");
+
+  reticleSlider.oninput = function (e) {
+    spraySize = e.target.value / 2;
+    SPRAY_DENSITY = spraySize;
+  }; //-----------------------
+
 
   var spray = function spray() {
     for (var i = 0; i < SPRAY_DENSITY; i++) {
@@ -119,7 +179,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       var x = coord.x + noise.x;
       var y = coord.y + noise.y;
       ctx.fillRect(x, y, 1, 1);
-      console.log("count");
     }
   };
 
@@ -132,6 +191,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
     yLast = coord.y;
     ctx.lineWidth = 5;
     spray();
+
+    if (playSound) {
+      spraySound.play();
+    }
   });
   document.addEventListener("mousemove", function (e) {
     if (!drawing) return;
@@ -149,6 +212,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     if (!drawing) return;
     clearInterval(sprayId);
     drawing = false;
+    spraySound.pause();
   });
 });
 
