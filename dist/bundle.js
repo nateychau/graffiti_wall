@@ -111,7 +111,8 @@ var SPRAY_DENSITY = 50;
 var sprayId = 0;
 var onHold = false;
 window.addEventListener("DOMContentLoaded", function (event) {
-  var canvas = document.getElementById("canvas"); //Spray sound properties
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d"); //---------Spray sound properties--------------
 
   var spraySound = new Audio();
   spraySound.src = '../dist/assets/spray_sound.mp3';
@@ -138,16 +139,23 @@ window.addEventListener("DOMContentLoaded", function (event) {
       this.classList.add('fa-volume-up');
       playSound = true;
     }
-  });
+  }); //-----------Restart functionality-------------------
+
+  var trashButton = document.getElementById("trash-icon");
+  trashButton.addEventListener('click', function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //!!add additional logic for resetting background
+  }); //------------Color picker related set up--------------
+
   var colorPicker = new iro.ColorPicker('#picker', {
     width: 100
-  });
-  var ctx = canvas.getContext("2d"); //event listener for color picker
+  }); //event listener for color picker
 
   ctx.fillStyle = colorPicker.color.hexString;
   colorPicker.on('color:change', function (color) {
     ctx.fillStyle = color.hexString;
-  }); //Density is controlled by a range input slider. (We can adjust min and max values of the slider, currently 1-100, default 50)
+  }); //-------------------Slider event listeners-----------------------
+  //Density is controlled by a range input slider. 
+  //(We can adjust min and max values of the slider, currently 1-100, default 50)
 
   var densitySlider = document.getElementById("density-slider");
 
@@ -162,7 +170,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
   reticleSlider.oninput = function (e) {
     spraySize = e.target.value / 2;
     SPRAY_DENSITY = spraySize;
-  };
+  }; //-----------------------
+
 
   var spray = function spray() {
     for (var i = 0; i < SPRAY_DENSITY; i++) {
