@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/canvas.css" />
+    <link rel="stylesheet" href="dist/sliders.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="dist/bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
@@ -15,7 +17,15 @@
   <body>
     <div class="main">
       <canvas id="canvas" width="1280" height="800"></canvas>
-      <div id="picker"></div>
+      <div class="settings-container">
+        <div class="slider-container">
+          <h2>Density</h2>
+          <input id="density-slider" class="slider" type="range" min="1" max="100" value="50">
+          <h2>Reticle Size</h2>
+          <input id="reticle-slider" class="slider" type="range" min="1" max="100" value="50">
+        </div>
+        <div id="picker"></div>
+      </div>
     </div>
   </body>
 </html>

@@ -1,8 +1,18 @@
 #canvas{
   background-color: aquamarine;
+  position: relative;
 }
 
 .main{
   display: flex; 
+  flex-direction: column;
   justify-content: center;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
 }
+
+.settings-container{
+  display: flex;
+  justify-content: space-between;
+}
+
