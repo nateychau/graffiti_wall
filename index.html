@@ -6,11 +6,14 @@
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/canvas.css" />
-    <link rel="stylesheet" href="dist/sliders.css" />
+    <link rel="stylesheet" href="dist/settings.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="dist/bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <!-- color picker -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/01de39c32b.js" crossorigin="anonymous"></script>
 
     <title>Graffiti Wall</title>
   </head>
@@ -23,6 +26,10 @@
           <input id="density-slider" class="slider" type="range" min="1" max="100" value="50">
           <h2>Reticle Size</h2>
           <input id="reticle-slider" class="slider" type="range" min="1" max="100" value="50">
+          <div>
+            <h2>Sound</h2>
+            <i id="sound-icon" class="fas fa-volume-up"></i>
+          </div>
         </div>
         <div id="picker"></div>
       </div>

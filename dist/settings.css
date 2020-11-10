@@ -34,3 +34,7 @@
 .slider-container{
   width: 200px;
 }
+
+#sound-icon{
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import * as Util from "./util.js";
 
 let drawing = false;
+let playSound = true;
 let coord;
 let brushSize = 5;
 let brushSizeRate = 0.1;
@@ -20,14 +21,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const spraySound = new Audio();
   spraySound.src = '../dist/assets/spray_sound.mp3';
   spraySound.loop = true;
-  spraySound.volume = 0.5;
+  spraySound.volume = 0.45;
+  //Event listener for semi-gapless looping
   spraySound.addEventListener('timeupdate', function(e){
     var buffer = .5
-    if(this.currentTime > this.duration - buffer){
+    if(playSound && !this.paused && this.currentTime > this.duration - buffer){
         this.currentTime = 1
         this.play()
     }
-});
+  });
+
+  //Audio on/off controls
+  const soundButton = document.getElementById("sound-icon");
+  soundButton.addEventListener('click', function(){
+    if(playSound){
+      this.classList.remove('fa-volume-up');
+      this.classList.add('fa-volume-mute');
+      playSound = false;
+    } else {
+      this.classList.remove('fa-volume-mute');
+      this.classList.add('fa-volume-up');
+      playSound = true;
+    }
+  })
 
   const colorPicker = new iro.ColorPicker('#picker', {
     width: 100
@@ -47,6 +63,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log(SPRAY_DENSITY);
   }
 
+  //Reticle slider handles need to be tweaked
   const reticleSlider = document.getElementById("reticle-slider");
   reticleSlider.oninput = function(e){
     spraySize = e.target.value/2; 
@@ -71,7 +88,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     yLast = coord.y;
     ctx.lineWidth = 5;
     spray();
-    spraySound.play();
+    if(playSound){
+      spraySound.play();
+    }
   });
 
   document.addEventListener("mousemove", (e) => {

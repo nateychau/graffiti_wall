@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
 
 var drawing = false;
+var playSound = true;
 var coord;
 var brushSize = 5;
 var brushSizeRate = 0.1;
@@ -115,13 +116,27 @@ window.addEventListener("DOMContentLoaded", function (event) {
   var spraySound = new Audio();
   spraySound.src = '../dist/assets/spray_sound.mp3';
   spraySound.loop = true;
-  spraySound.volume = 0.5;
+  spraySound.volume = 0.45; //Event listener for semi-gapless looping
+
   spraySound.addEventListener('timeupdate', function (e) {
     var buffer = .5;
 
-    if (this.currentTime > this.duration - buffer) {
+    if (playSound && !this.paused && this.currentTime > this.duration - buffer) {
       this.currentTime = 1;
       this.play();
+    }
+  }); //Audio on/off controls
+
+  var soundButton = document.getElementById("sound-icon");
+  soundButton.addEventListener('click', function () {
+    if (playSound) {
+      this.classList.remove('fa-volume-up');
+      this.classList.add('fa-volume-mute');
+      playSound = false;
+    } else {
+      this.classList.remove('fa-volume-mute');
+      this.classList.add('fa-volume-up');
+      playSound = true;
     }
   });
   var colorPicker = new iro.ColorPicker('#picker', {
@@ -139,7 +154,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
   densitySlider.oninput = function (e) {
     SPRAY_DENSITY = e.target.value;
     console.log(SPRAY_DENSITY);
-  };
+  }; //Reticle slider handles need to be tweaked
+
 
   var reticleSlider = document.getElementById("reticle-slider");
 
@@ -166,7 +182,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
     yLast = coord.y;
     ctx.lineWidth = 5;
     spray();
-    spraySound.play();
+
+    if (playSound) {
+      spraySound.play();
+    }
   });
   document.addEventListener("mousemove", function (e) {
     if (!drawing) return;
