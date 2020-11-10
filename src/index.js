@@ -1,4 +1,5 @@
 import * as Util from "./util.js";
+import { takeSnapshot } from "./screen-capture";
 
 let drawing = false;
 let coord;
@@ -25,6 +26,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
       console.log("count");
     }
   };
+
+  // ctx.beginPath();
+  // ctx.fillStyle = "blue"
+  // ctx.rect(0, 0, canvas.width, canvas.height);
+  // ctx.fill()
+
+  // On hold. 
+  // const downloadLink = document.getElementById("download-link")
+  // downloadLink.download = "some_filename.png"
+  // downloadLink.href = canvas.toDataURL("image/png")
+  // downloadLink.addEventListener("click", takeSnapshot(canvas))
 
   canvas.addEventListener("mousedown", (e) => {
     drawing = true;

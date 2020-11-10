@@ -96,6 +96,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
+/* harmony import */ var _screen_capture__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./screen-capture */ "./src/screen-capture.js");
+
 
 var drawing = false;
 var coord;
@@ -121,7 +123,16 @@ window.addEventListener("DOMContentLoaded", function (event) {
       ctx.fillRect(x, y, 1, 1);
       console.log("count");
     }
-  };
+  }; // ctx.beginPath();
+  // ctx.fillStyle = "blue"
+  // ctx.rect(0, 0, canvas.width, canvas.height);
+  // ctx.fill()
+  // On hold. 
+  // const downloadLink = document.getElementById("download-link")
+  // downloadLink.download = "some_filename.png"
+  // downloadLink.href = canvas.toDataURL("image/png")
+  // downloadLink.addEventListener("click", takeSnapshot(canvas))
+
 
   canvas.addEventListener("mousedown", function (e) {
     drawing = true;
@@ -151,6 +162,27 @@ window.addEventListener("DOMContentLoaded", function (event) {
     drawing = false;
   });
 });
+
+/***/ }),
+
+/***/ "./src/screen-capture.js":
+/*!*******************************!*\
+  !*** ./src/screen-capture.js ***!
+  \*******************************/
+/*! exports provided: takeSnapshot */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "takeSnapshot", function() { return takeSnapshot; });
+function takeSnapshot(canvas) {
+  // const downloadBtn = document.getElementById("download")
+  return function () {
+    var link = document.getElementById('download-link');
+    link.download = "some_filename.png";
+    link.href = canvas.toDataURL("image/png"); // link.click();
+  };
+}
 
 /***/ }),
 
