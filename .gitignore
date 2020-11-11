@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # bundle
-bundle.js
-bundle.js.map
+dist/bundle.js
+dist/bundle.js.map
