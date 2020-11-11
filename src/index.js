@@ -1,4 +1,5 @@
 import * as Util from "./util.js";
+import { takeSnapshot } from "./screen-capture";
 
 let drawing = false;
 let playSound = true;
@@ -86,7 +87,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
     SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
   };
 
-  //-----------------------
+  //Reticle slider handles need to be tweaked
+  const reticleSlider = document.getElementById("reticle-slider");
+  reticleSlider.oninput = function(e){
+    spraySize = e.target.value/2; 
+    SPRAY_DENSITY = spraySize;
+  }
+  //-----------------------------------------------------------
+
+  // ----------------Download Button ------------------------------
+
+  const downloadImgBtn = document.getElementById("download-img-btn")
+  downloadImgBtn.addEventListener("click", () => {
+    takeSnapshot(canvas)
+  })
+  
+  //-----------------------------------------------------------
 
   const spray = function () {
     for (let i = 0; i < SPRAY_DENSITY; i++) {
