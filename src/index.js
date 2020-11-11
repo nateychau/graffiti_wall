@@ -81,7 +81,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
     spraySize = e.target.value/2; 
     SPRAY_DENSITY = spraySize;
   }
-  //-----------------------
+  //-----------------------------------------------------------
+
+  // ----------------Download Button ------------------------------
+
+  const downloadImgBtn = document.getElementById("download-img-btn")
+  downloadImgBtn.addEventListener("click", () => {
+    takeSnapshot(canvas)
+  })
+  
+  //-----------------------------------------------------------
 
   const spray = function () {
     for (let i = 0; i < SPRAY_DENSITY; i++) {
@@ -91,17 +100,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       ctx.fillRect(x, y, 1, 1);
     }
   };
-
-  // ctx.beginPath();
-  // ctx.fillStyle = "blue"
-  // ctx.rect(0, 0, canvas.width, canvas.height);
-  // ctx.fill()
-
-  // On hold. 
-  // const downloadLink = document.getElementById("download-link")
-  // downloadLink.download = "some_filename.png"
-  // downloadLink.href = canvas.toDataURL("image/png")
-  // downloadLink.addEventListener("click", takeSnapshot(canvas))
 
   canvas.addEventListener("mousedown", (e) => {
     drawing = true;
