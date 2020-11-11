@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/nateychau/graffiti_wall/issues"
   },
-  "homepage": "https://github.com/nateychau/graffiti_wall#readme",
+  "homepage": "https://nateychau.github.io/graffiti_wall/index",
   "dependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
