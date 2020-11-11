@@ -7220,6 +7220,24 @@ window.addEventListener("DOMContentLoaded", function (event) {
       this.classList.add("fa-volume-up");
       playSound = true;
     }
+  }); //-------------Toolbar toggle-------------------------
+
+  var toolbarOpen = false;
+  var toolbarContainer = document.getElementById("toolbar-container");
+  var toolbarIcon = document.getElementById("toolbar-icon");
+  var toolbarButton = document.getElementById("toolbar-toggle");
+  toolbarButton.addEventListener("click", function () {
+    toolbarContainer.classList.toggle("is-open"); // toolbarButton.classList.toggle("big-btn")
+
+    if (toolbarOpen) {
+      toolbarIcon.classList.remove("fa-caret-left");
+      toolbarIcon.classList.add("fa-caret-right");
+      toolbarOpen = false;
+    } else {
+      toolbarIcon.classList.remove("fa-caret-right");
+      toolbarIcon.classList.add("fa-caret-left");
+      toolbarOpen = true;
+    }
   }); //-----------Restart functionality-------------------
 
   var trashButton = document.getElementById("trash-icon");
@@ -7228,7 +7246,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
   }); //------------Color picker related set up--------------
 
   var colorPicker = new iro.ColorPicker("#picker", {
-    width: 100
+    width: 100,
+    color: '#7FFFD4',
+    display: 'inline-block',
+    id: 'picker-circle'
   }); //event listener for color picker
 
   ctx.fillStyle = colorPicker.color.hexString;
@@ -7252,7 +7273,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
   densitySlider.oninput = function (e) {
     SPRAY_DENSITY_RATIO = e.target.value / 50;
     SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
-  }; //-----------------------
+  }; //-----------------------------------------------------------
+  // ----------------Download Button ------------------------------
 
 
   var downloadImgBtn = document.getElementById("download-img-btn");

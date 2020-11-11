@@ -1,6 +1,21 @@
 .settings-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #733635;
+  width: 200px;
+  position: absolute;
+  padding: 20px 20px;
+  z-index: 9;
+  right: 0;
+  transition: margin-right 1s;
+  border-bottom-left-radius: 8px;
+  box-shadow: -1px 1px 10px .1px #939596;
+}
+
+.is-open{
+  transition: margin-right 1s;
+  margin-right: -240px;
 }
 
 .slider-container > div{
@@ -46,5 +61,65 @@
 
 .utility{
   cursor: pointer;
+  margin-left: 15px;
 }
 
+#download-img-btn{
+  margin-top: 20px;
+  border-radius: 8px; 
+  padding: 5px 15px;
+  background-color: #b6a4a4;
+  box-shadow: -.7px .1px 1px .1px #939596;
+  font-weight: 800;
+  outline: none;
+  cursor: pointer;
+}
+
+#download-img-btn:hover{
+  background-color:#ad9e9e;
+}
+
+#download-img-btn:active{
+  position: relative;
+  top: 1px;
+}
+
+#toolbar-toggle{
+  font-size: 2rem;
+  display: flex;
+  padding-left: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: -20%;
+  background-color: #733635;
+  width: 40px;
+  height: 100px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  box-shadow: -.7px .1px 1px .1px #939596;
+  color: #b6a4a4;
+}
+
+#toolbar-toggle:hover{
+  background-color: #6b3231;
+  cursor: pointer;
+}
+
+
+.IroSlider, .IroWheel{
+  cursor:pointer;
+}
+
+#picker{
+  margin-top: 10px;
+}
+
+.setting-btn{
+  display: flex;
+}
+
+h2{
+  font-weight: 600;
+}
