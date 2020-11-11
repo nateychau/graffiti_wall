@@ -3,16 +3,13 @@
 }
 
 #canvas{
-  position: relative;
+  /* position: absolute; */
 }
 
-/* .main{
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
+.main{
   position: relative;
   font-family: 'Roboto', sans-serif;
-} */
+}
 
 body{
   overflow-x: hidden;
