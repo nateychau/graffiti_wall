@@ -6,14 +6,41 @@
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/canvas.css" />
+    <link rel="stylesheet" href="dist/settings.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="dist/bundle.js"></script>
+    <!-- color picker -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/01de39c32b.js" crossorigin="anonymous"></script>
 
     <title>Graffiti Wall</title>
   </head>
   <body>
     <div class="main">
-      <canvas id="canvas" width="500" height="500"></canvas>
+      <canvas id="canvas" width="1280" height="800"></canvas>
+      <div class="settings-container">
+        <div class="slider-container">
+          <div>
+            <h2>Density</h2>
+            <input id="density-slider" class="slider" type="range" min="1" max="100" value="50">
+          </div>
+          <div>
+            <h2>Reticle Size</h2>
+            <input id="reticle-slider" class="slider" type="range" min="1" max="100" value="50">
+          </div>
+          <div>
+            <h2>Sound</h2>
+            <i id="sound-icon" class="utility fas fa-volume-up"></i>
+          </div>
+          <div>
+            <h2>Restart</h2>
+            <i id="trash-icon" class="utility fas fa-trash-alt"></i>
+          </div>
+        </div>
+        <div id="picker"></div>
+      </div>
     </div>
     <a id="download-link" >test</a>
   </body>
