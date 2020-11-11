@@ -7184,9 +7184,11 @@ var brushSizeRate = 0.1;
 var pauseTime = 0;
 var xLast;
 var yLast;
-var spraySize = 10;
+var spraySize = 5;
 var HOLD_THRESHOLD = 50;
-var SPRAY_DENSITY = 50;
+var SPRAY_DENSITY_MEDIAN = 2 * Math.PI * Math.pow(spraySize, 2);
+var SPRAY_DENSITY_RATIO = 1;
+var SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
 var sprayId = 0;
 var onHold = false;
 window.addEventListener("DOMContentLoaded", function (event) {
@@ -7194,12 +7196,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
   var ctx = canvas.getContext("2d"); //---------Spray sound properties--------------
 
   var spraySound = new Audio();
-  spraySound.src = '../dist/assets/spray_sound.mp3';
+  spraySound.src = "../dist/assets/spray_sound.mp3";
   spraySound.loop = true;
   spraySound.volume = 0.45; //Event listener for semi-gapless looping
 
-  spraySound.addEventListener('timeupdate', function (e) {
-    var buffer = .5;
+  spraySound.addEventListener("timeupdate", function (e) {
+    var buffer = 0.5;
 
     if (playSound && !this.paused && this.currentTime > this.duration - buffer) {
       this.currentTime = 1;
@@ -7208,47 +7210,69 @@ window.addEventListener("DOMContentLoaded", function (event) {
   }); //Audio on/off controls
 
   var soundButton = document.getElementById("sound-icon");
-  soundButton.addEventListener('click', function () {
+  soundButton.addEventListener("click", function () {
     if (playSound) {
-      this.classList.remove('fa-volume-up');
-      this.classList.add('fa-volume-mute');
+      this.classList.remove("fa-volume-up");
+      this.classList.add("fa-volume-mute");
       playSound = false;
     } else {
-      this.classList.remove('fa-volume-mute');
-      this.classList.add('fa-volume-up');
+      this.classList.remove("fa-volume-mute");
+      this.classList.add("fa-volume-up");
       playSound = true;
+    }
+  }); //-------------Toolbar toggle-------------------------
+
+  var toolbarOpen = false;
+  var toolbarContainer = document.getElementById("toolbar-container");
+  var toolbarIcon = document.getElementById("toolbar-icon");
+  var toolbarButton = document.getElementById("toolbar-toggle");
+  toolbarButton.addEventListener("click", function () {
+    toolbarContainer.classList.toggle("is-open"); // toolbarButton.classList.toggle("big-btn")
+
+    if (toolbarOpen) {
+      toolbarIcon.classList.remove("fa-caret-left");
+      toolbarIcon.classList.add("fa-caret-right");
+      toolbarOpen = false;
+    } else {
+      toolbarIcon.classList.remove("fa-caret-right");
+      toolbarIcon.classList.add("fa-caret-left");
+      toolbarOpen = true;
     }
   }); //-----------Restart functionality-------------------
 
   var trashButton = document.getElementById("trash-icon");
-  trashButton.addEventListener('click', function () {
+  trashButton.addEventListener("click", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height); //!!add additional logic for resetting background
   }); //------------Color picker related set up--------------
 
-  var colorPicker = new iro.ColorPicker('#picker', {
-    width: 100
+  var colorPicker = new iro.ColorPicker("#picker", {
+    width: 100,
+    color: '#7FFFD4',
+    display: 'inline-block',
+    id: 'picker-circle'
   }); //event listener for color picker
 
   ctx.fillStyle = colorPicker.color.hexString;
-  colorPicker.on('color:change', function (color) {
+  colorPicker.on("color:change", function (color) {
     ctx.fillStyle = color.hexString;
   }); //-------------------Slider event listeners-----------------------
-  //Density is controlled by a range input slider. 
-  //(We can adjust min and max values of the slider, currently 1-100, default 50)
-
-  var densitySlider = document.getElementById("density-slider");
-
-  densitySlider.oninput = function (e) {
-    SPRAY_DENSITY = e.target.value;
-    console.log(SPRAY_DENSITY);
-  }; //Reticle slider handles need to be tweaked
-
+  //Reticle slider handles need to be tweaked
 
   var reticleSlider = document.getElementById("reticle-slider");
 
   reticleSlider.oninput = function (e) {
-    spraySize = e.target.value / 2;
-    SPRAY_DENSITY = spraySize;
+    spraySize = e.target.value / 8;
+    SPRAY_DENSITY_MEDIAN = 2 * Math.PI * Math.pow(spraySize, 2);
+    SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
+  }; //Density is controlled by a range input slider.
+  //(We can adjust min and max values of the slider, currently 1-100, default 50)
+
+
+  var densitySlider = document.getElementById("density-slider");
+
+  densitySlider.oninput = function (e) {
+    SPRAY_DENSITY_RATIO = e.target.value / 50;
+    SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
   }; //-----------------------------------------------------------
   // ----------------Download Button ------------------------------
 
@@ -7265,6 +7289,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
       var y = coord.y + noise.y;
       ctx.fillRect(x, y, 1, 1);
     }
+
+    console.log("count");
   };
 
   canvas.addEventListener("mousedown", function (e) {
@@ -7275,7 +7301,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     xLast = coord.x;
     yLast = coord.y;
     ctx.lineWidth = 5;
-    spray();
+    sprayId = setInterval(spray, 20);
 
     if (playSound) {
       spraySound.play();

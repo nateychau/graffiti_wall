@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/canvas.css" />
     <link rel="stylesheet" href="dist/settings.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="dist/bundle.js"></script>
     <!-- color picker -->
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     <!-- font awesome -->
-    <script src="https://kit.fontawesome.com/01de39c32b.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/01de39c32b.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Graffiti Wall</title>
   </head>
@@ -26,27 +32,53 @@
       </div>
       <canvas id="canvas" width="1280" height="800"></canvas>
       <div class="settings-container">
+      <div 
+        id="toolbar-container"
+        class="settings-container">
         <div class="slider-container">
           <div>
             <h2>Density</h2>
-            <input id="density-slider" class="slider" type="range" min="1" max="100" value="50">
+            <input
+              id="density-slider"
+              class="slider"
+              type="range"
+              min="1"
+              max="100"
+              value="50"
+              />
+            </div>
+            <div>
+              <h2>Reticle Size</h2>
+              <input
+              id="reticle-slider"
+              class="slider"
+              type="range"
+              min="1"
+              max="100"
+              value="20"
+              />
+            </div>
+            <div id="picker"></div>
+            <div class="setting-btn">
+              <h2>Sound</h2>
+              <i id="sound-icon" class="utility fas fa-volume-up"></i>
+            </div>
+            <div class="setting-btn">
+              <h2>Restart</h2>
+              <i id="trash-icon" class="utility fas fa-trash-alt"></i>
+            </div>
           </div>
-          <div>
-            <h2>Reticle Size</h2>
-            <input id="reticle-slider" class="slider" type="range" min="1" max="100" value="50">
+          <button id="download-img-btn">SAVE</button>
+          <div id="toolbar-toggle">
+            <i 
+              id="toolbar-icon"
+              class="fas fa-caret-right"
+            ></i>
           </div>
-          <div>
-            <h2>Sound</h2>
-            <i id="sound-icon" class="utility fas fa-volume-up"></i>
-          </div>
-          <div>
-            <h2>Restart</h2>
-            <i id="trash-icon" class="utility fas fa-trash-alt"></i>
-          </div>
-        </div>
-        <div id="picker"></div>
+      </div>
+      <div id="canvas-container">
+        <canvas id="canvas" width="1360" height="850"></canvas>
       </div>
     </div>
-    <button id="download-img-btn">SAVE</button>
   </body>
 </html>

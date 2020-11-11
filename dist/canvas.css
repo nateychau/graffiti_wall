@@ -1,12 +1,12 @@
+#canvas-container{
+  background-image: url('./assets//bricks.jpg');
+}
+
 #canvas{
-  background-color: aquamarine;
-  position: relative;
+  /* position: absolute; */
 }
 
 .main{
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
   position: relative;
   font-family: 'Roboto', sans-serif;
 }
@@ -21,8 +21,7 @@
   transform: rotate(5deg);
 }
 
-
-
-
-
-
+body{
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+}
