@@ -4,10 +4,6 @@
   height: 850px;
 }
 
-#canvas{
-  /* position: absolute; */
-}
-
 .main{
   position: relative;
   font-family: 'Roboto', sans-serif;
@@ -26,4 +22,12 @@
 body{
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
+}
+
+.main-title{
+  padding-top: 20px;
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-size: 80px;
+  display: flex;
+  justify-content: center;
 }
