@@ -117,7 +117,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   downloadImgBtn.addEventListener("click", () => {
     takeSnapshot(canvas)
   })
-  
+
   //-----------------------------------------------------------
 
   const spray = function () {
@@ -168,4 +168,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
     drawing = false;
     spraySound.pause();
   });
+
+  // backpack animation
+  const backpackImg = document.getElementsByClassName("backpack-img")[0]
+  let backpackInterval = window.setInterval(() => {
+    backpackImg.classList.toggle("rotate")
+  }, 850)
+
+  backpackImg.addEventListener("click", () => {
+    backpackImg.classList.remove("rotate")
+    window.clearInterval(backpackInterval)
+  })
 });

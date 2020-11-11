@@ -11,9 +11,17 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.backpack-img {
+  cursor: pointer;
+  transform: rotate(-5deg);
+  transition: all 250ms ease-in-out;
+}
+
+.rotate {
+  transform: rotate(5deg);
+}
+
 body{
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
 }
-
-
