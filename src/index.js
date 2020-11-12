@@ -88,7 +88,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //------------Color picker related set up--------------
   const colorPicker = new iro.ColorPicker("#picker", {
-    width: 100,
+    width: 150,
     color: "#FFD700",
     display: "inline-block",
     id: "picker-circle",
