@@ -8,9 +8,18 @@
   align-items: center;
 }
 
+#background-canvas{
+  background-image: url(./assets//bricks.jpg);
+  position: absolute;
+  top: 100px;
+  z-index: 1;
+  box-shadow: -1px 1px 10px 0.5px #939596;
+}
+
 .main{
   position: relative;
   font-family: 'Roboto', sans-serif;
+  /* background-color: #ff6868; */
 }
 
 .backpack-img {
@@ -34,4 +43,15 @@ body{
   font-size: 80px;
   display: flex;
   justify-content: center;
+  z-index: 4;
 }
+
+#mouse-canvas{
+  position: absolute;
+  cursor: none;
+  top: 100px;
+  z-index: 3;
+  box-shadow: -.5px .5px 10px 0.3px #939596;
+  border-radius: 3px;
+}
+

@@ -13,6 +13,7 @@
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   box-shadow: -1px 1px 10px 0.1px #939596;
+  z-index: 10;
 }
 
 .is-open {
