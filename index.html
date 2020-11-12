@@ -29,17 +29,11 @@
   </head>
   <body>
     <div class="main">
-      <div class="main-title">DaBaby vinci</div>
-      <div class="toolbar">
-        <div class="backpack">
-          <img class="backpack-img" src="https://img.icons8.com/ios-filled/50/000000/backpack.png"/>
-        </div>
-      </div>
       <div 
         id="toolbar-container"
         class="settings-container">
         <div class="slider-container">
-          <div>
+          <div class="slider-item-container">
             <h2>Density</h2>
             <input
               id="density-slider"
@@ -50,7 +44,7 @@
               value="50"
               />
             </div>
-            <div>
+            <div class="slider-item-container">
               <h2>Reticle Size</h2>
               <input
               id="reticle-slider"
@@ -63,23 +57,27 @@
             </div>
             <div id="picker"></div>
             <div class="setting-btn">
-              <h2>Sound</h2>
-              <i id="sound-icon" class="utility fas fa-volume-up"></i>
+              <button>
+                SOUND
+                <i id="sound-icon" class="utility fas fa-volume-up"></i>
+              </button>
             </div>
             <div class="setting-btn">
-              <h2>Restart</h2>
-              <i id="trash-icon" class="utility fas fa-trash-alt"></i>
+              <button>
+                RESTART
+                <i id="trash-icon" class="utility fas fa-trash-alt"></i>
+              </button>
+            </div>
+            <div class="setting-btn">
+              <button id="download-img-btn">SAVE</button>
             </div>
           </div>
-          <button id="download-img-btn">SAVE</button>
           <div id="toolbar-toggle">
-            <i 
-              id="toolbar-icon"
-              class="fas fa-caret-right"
-            ></i>
+            <img class="backpack-img" src="https://img.icons8.com/ios-filled/50/000000/backpack.png"/>
           </div>
       </div>
       <div id="canvas-container">
+        <div class="main-title">DaBaby vinci</div>
         <canvas id="canvas" width="1360" height="850"></canvas>
       </div>
   </body>
