@@ -2,7 +2,7 @@ import * as Util from "./util.js";
 import { takeSnapshot } from "./screen-capture";
 
 let drawing = false;
-let playSound = true;
+let playSound = false;
 let coord;
 let mouseCoord;
 let brushSize = 5;
@@ -27,6 +27,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //---------Spray sound properties--------------
   const spraySound = new Audio();
   spraySound.src = "../dist/assets/spray_sound.mp3";
+  spraySound.addEventListener('loadeddata', () => playSound = true);
+
   spraySound.loop = true;
   spraySound.volume = 0.45;
   //Event listener for semi-gapless looping

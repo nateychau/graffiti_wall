@@ -7177,7 +7177,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var drawing = false;
-var playSound = true;
+var playSound = false;
 var coord;
 var mouseCoord;
 var brushSize = 5;
@@ -7200,6 +7200,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   var spraySound = new Audio();
   spraySound.src = "../dist/assets/spray_sound.mp3";
+  spraySound.addEventListener('loadeddata', function () {
+    return playSound = true;
+  });
   spraySound.loop = true;
   spraySound.volume = 0.45; //Event listener for semi-gapless looping
 
