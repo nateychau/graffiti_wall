@@ -57,19 +57,27 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const toolbarContainer = document.getElementById("toolbar-container");
   const toolbarIcon = document.getElementById("toolbar-icon");
   const toolbarButton = document.getElementById("toolbar-toggle");
-  toolbarButton.addEventListener("click", function(){
+  const backpackImg = document.getElementsByClassName("backpack-img")[0];
+  let backpackInterval = null;
+
+  toolbarButton.addEventListener("click", function () {
     toolbarContainer.classList.toggle("is-open");
     // toolbarButton.classList.toggle("big-btn")
-    if(toolbarOpen){
-      toolbarIcon.classList.remove("fa-caret-left");
-      toolbarIcon.classList.add("fa-caret-right");
+    if (toolbarOpen) {
+      // toolbarIcon.classList.remove("fa-caret-left");
+      // toolbarIcon.classList.add("fa-caret-right");
+      backpackImg.classList.remove("rotate");
+      window.clearInterval(backpackInterval);
       toolbarOpen = false;
     } else {
-      toolbarIcon.classList.remove("fa-caret-right");
-      toolbarIcon.classList.add("fa-caret-left");
+      // toolbarIcon.classList.remove("fa-caret-right");
+      // toolbarIcon.classList.add("fa-caret-left");
+      backpackInterval = window.setInterval(() => {
+        backpackImg.classList.toggle("rotate");
+      }, 850);
       toolbarOpen = true;
     }
-  })
+  });
 
   //-----------Restart functionality-------------------
   const trashButton = document.getElementById("trash-icon");
@@ -80,10 +88,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //------------Color picker related set up--------------
   const colorPicker = new iro.ColorPicker("#picker", {
-    width: 100,
-    color: '#7FFFD4',
-    display: 'inline-block',
-    id: 'picker-circle'
+    width: 150,
+    color: "#FFD700",
+    display: "inline-block",
+    id: "picker-circle",
   });
   //event listener for color picker
   ctx.fillStyle = colorPicker.color.hexString;
@@ -113,10 +121,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   // ----------------Download Button ------------------------------
 
-  const downloadImgBtn = document.getElementById("download-img-btn")
+  const downloadImgBtn = document.getElementById("download-img-btn");
   downloadImgBtn.addEventListener("click", () => {
-    takeSnapshot(canvas)
-  })
+    takeSnapshot();
+  });
 
   //-----------------------------------------------------------
 
@@ -169,14 +177,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
     spraySound.pause();
   });
 
-  // backpack animation
-  const backpackImg = document.getElementsByClassName("backpack-img")[0]
-  let backpackInterval = window.setInterval(() => {
-    backpackImg.classList.toggle("rotate")
-  }, 850)
-
-  backpackImg.addEventListener("click", () => {
-    backpackImg.classList.remove("rotate")
-    window.clearInterval(backpackInterval)
-  })
 });

@@ -1,9 +1,10 @@
 import html2canvas from "html2canvas";
 
-export function takeSnapshot(canvas) {
-  html2canvas(canvas).then((canvas) => {
+export function takeSnapshot() {
+  let canvasContainer = document.getElementById("canvas-container")
+  html2canvas(canvasContainer).then((canvas) => {
     // we can name the file whatever we want (graffiti.png)
-    saveAs(canvas.toDataURL(), 'file-name.png');
+    saveAs(canvas.toDataURL(), 'amazing-creation.png');
   });
 }
 
