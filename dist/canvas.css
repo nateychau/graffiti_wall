@@ -1,7 +1,11 @@
 #canvas-container{
-  background-image: url('./assets//bricks.jpg');
-  width: 1360px; 
-  height: 850px;
+  background-image: url(./assets//bricks.jpg);
+  /* width: 1360px; */
+  /* height: 850px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .main{

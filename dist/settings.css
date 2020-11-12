@@ -8,8 +8,10 @@
   padding: 20px 20px;
   z-index: 9;
   right: 0;
+  top: 10%;
   transition: margin-right 1s;
   border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
   box-shadow: -1px 1px 10px .1px #939596;
 }
 
@@ -92,13 +94,13 @@
   align-items: center;
   position: absolute;
   top: 40%;
-  left: -20%;
+  left: -28%;
   background-color: #733635;
-  width: 40px;
+  width: 62px;
   height: 100px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
-  box-shadow: -.7px .1px 1px .1px #939596;
+  box-shadow: -0.7px 0.1px 1px 0.1px #939596;
   color: #b6a4a4;
 }
 
@@ -107,6 +109,9 @@
   cursor: pointer;
 }
 
+#toolbar-toggle:hover > .backpack-img{
+ filter: invert(75%);
+}
 
 .IroSlider, .IroWheel{
   cursor:pointer;
@@ -114,6 +119,8 @@
 
 #picker{
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .setting-btn{
