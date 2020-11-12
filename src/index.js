@@ -4,6 +4,7 @@ import { takeSnapshot } from "./screen-capture";
 let drawing = false;
 let playSound = true;
 let coord;
+let mouseCoord;
 let brushSize = 5;
 let brushSizeRate = 0.1;
 let pauseTime = 0;
@@ -18,8 +19,10 @@ let sprayId = 0;
 let onHold = false;
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+  const mouseCanvas = document.getElementById("mouse-canvas");
+  const mouseCtx = mouseCanvas.getContext("2d");
+  const mainCanvas = document.getElementById("canvas");
+  const ctx = mainCanvas.getContext("2d");
 
   //---------Spray sound properties--------------
   const spraySound = new Audio();
@@ -39,15 +42,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   });
   //Audio on/off controls
-  const soundButton = document.getElementById("sound-icon");
+  const soundButton = document.getElementById("sound-btn");
+  const soundIcon = document.getElementById("sound-icon");
   soundButton.addEventListener("click", function () {
     if (playSound) {
-      this.classList.remove("fa-volume-up");
-      this.classList.add("fa-volume-mute");
+      soundIcon.classList.remove("fa-volume-up");
+      soundIcon.classList.add("fa-volume-mute");
       playSound = false;
     } else {
-      this.classList.remove("fa-volume-mute");
-      this.classList.add("fa-volume-up");
+      soundIcon.classList.remove("fa-volume-mute");
+      soundIcon.classList.add("fa-volume-up");
       playSound = true;
     }
   });
@@ -80,7 +84,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 
   //-----------Restart functionality-------------------
-  const trashButton = document.getElementById("trash-icon");
+  const trashButton = document.getElementById("trash-btn");
   trashButton.addEventListener("click", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //!!add additional logic for resetting background
@@ -95,8 +99,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
   //event listener for color picker
   ctx.fillStyle = colorPicker.color.hexString;
+  mouseCtx.fillStyle = colorPicker.color.hexString;
+  mouseCtx.strokeStyle = '#262624';
   colorPicker.on("color:change", function (color) {
     ctx.fillStyle = color.hexString;
+    mouseCtx.fillStyle = color.hexString;
   });
 
   //-------------------Slider event listeners-----------------------
@@ -107,6 +114,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
     spraySize = e.target.value / 8;
     SPRAY_DENSITY_MEDIAN = 2 * Math.PI * spraySize ** 2;
     SPRAY_DENSITY = SPRAY_DENSITY_RATIO * SPRAY_DENSITY_MEDIAN;
+
+
+    mouseCtx.clearRect(0,0, mouseCanvas.width, mouseCanvas.height);   
+    mouseCtx.beginPath();
+    mouseCtx.arc(mouseCoord.x, mouseCoord.y, spraySize+8, 0, 2*Math.PI);
+    mouseCtx.stroke();
+    mouseCtx.fill();
   };
 
   //Density is controlled by a range input slider.
@@ -138,7 +152,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log("count");
   };
 
-  canvas.addEventListener("mousedown", (e) => {
+  mouseCanvas.addEventListener("mousemove", (e) => {
+    mouseCtx.clearRect(0,0, mouseCanvas.width, mouseCanvas.height);
+    mouseCoord = Util.getPosition(e, mouseCanvas);     
+    mouseCtx.beginPath();
+    mouseCtx.arc(mouseCoord.x, mouseCoord.y, spraySize+8, 0, 2*Math.PI);
+    mouseCtx.stroke();
+    mouseCtx.fill();
+  })
+
+  mouseCanvas.addEventListener("mousedown", (e) => {
     drawing = true;
     coord = Util.getPosition(e, canvas); //get start point for line
     ctx.moveTo(coord.x, coord.y);

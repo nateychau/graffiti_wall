@@ -1,10 +1,15 @@
 import html2canvas from "html2canvas";
 
 export function takeSnapshot() {
+  let mouseCanvas = document.getElementById('mouse-canvas');
+  let mouseCtx = mouseCanvas.getContext('2d');
+  mouseCtx.clearRect(0, 0, mouseCanvas.width, mouseCanvas.height);
+  mouseCanvas.style.boxShadow = 'none';
   let canvasContainer = document.getElementById("canvas-container")
   html2canvas(canvasContainer).then((canvas) => {
     // we can name the file whatever we want (graffiti.png)
     saveAs(canvas.toDataURL(), 'amazing-creation.png');
+    mouseCanvas.style.boxShadow = '-.5px .5px 10px 0.3px #939596';
   });
 }
 
