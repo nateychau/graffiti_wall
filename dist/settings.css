@@ -75,10 +75,11 @@
   font-weight: 800;
   outline: none;
   cursor: pointer;
+  transition: background-color 450ms ease-in-out;
 }
 
 #download-img-btn:hover{
-  background-color:#ad9e9e;
+  background-color:rgba(255,255,255, 1);
 }
 
 #download-img-btn:active{
@@ -129,4 +130,13 @@
 
 h2{
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  font-size: 17px;
+  color: rgba(255,255,255, 0.5);
+  transition: color 450ms ease-in-out;
+}
+             
+.slider-item-container:hover > h2, .setting-btn:hover > h2 {
+  color: rgb(255,255,255);
 }
