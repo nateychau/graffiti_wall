@@ -1,4 +1,4 @@
-.settings-container{
+.settings-container {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -12,29 +12,29 @@
   transition: margin-right 1s;
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
-  box-shadow: -1px 1px 10px .1px #939596;
+  box-shadow: -1px 1px 10px 0.1px #939596;
 }
 
-.is-open{
+.is-open {
   transition: margin-right 1s;
   margin-right: -240px;
 }
 
-.slider-container > div{
+.slider-container > div {
   padding: 10px 10px;
 }
 
-.slider{
-  -webkit-appearance: none;  
+.slider {
+  -webkit-appearance: none;
   appearance: none;
-  width: 100%; 
-  height: 6px; 
+  width: 100%;
+  height: 6px;
   border-radius: 8px;
-  background: #d3d3d3; 
-  outline: none; 
-  opacity: 0.7; 
-  -webkit-transition: .2s; 
-  transition: opacity .2s;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 /* Webkit for most browsers, moz for firefox */
@@ -44,7 +44,7 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  border-radius: 50%; 
+  border-radius: 50%;
   background: #b11226;
   cursor: pointer;
 }
@@ -57,37 +57,38 @@
   cursor: pointer;
 }
 
-.slider-container{
+.slider-container {
   width: 200px;
 }
 
-.utility{
+.utility {
   cursor: pointer;
   margin-left: 15px;
 }
 
-#download-img-btn{
-  margin-top: 20px;
-  border-radius: 8px; 
+.setting-btn button {
+  border-radius: 25px;
   padding: 5px 15px;
   background-color: #b6a4a4;
-  box-shadow: -.7px .1px 1px .1px #939596;
+  box-shadow: -0.7px 0.1px 1px 0.1px #939596;
   font-weight: 800;
   outline: none;
   cursor: pointer;
   transition: background-color 450ms ease-in-out;
+  width: 100%;
 }
 
-#download-img-btn:hover{
-  background-color:rgba(255,255,255, 1);
+#download-img-btn:hover,
+.setting-btn:hover > button {
+  background-color: rgba(255, 255, 255, 1);
 }
 
-#download-img-btn:active{
+#download-img-btn:active {
   position: relative;
   top: 1px;
 }
 
-#toolbar-toggle{
+#toolbar-toggle {
   font-size: 2rem;
   display: flex;
   padding-left: 10px;
@@ -105,38 +106,40 @@
   color: #b6a4a4;
 }
 
-#toolbar-toggle:hover{
+#toolbar-toggle:hover {
   background-color: #6b3231;
   cursor: pointer;
 }
 
-#toolbar-toggle:hover > .backpack-img{
- filter: invert(75%);
+#toolbar-toggle:hover > .backpack-img {
+  filter: invert(75%);
 }
 
-.IroSlider, .IroWheel{
-  cursor:pointer;
+.IroSlider,
+.IroWheel {
+  cursor: pointer;
 }
 
-#picker{
+#picker {
   margin-top: 10px;
   display: flex;
   justify-content: center;
 }
 
-.setting-btn{
+.setting-btn {
   display: flex;
 }
 
-h2{
+h2 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06rem;
   font-size: 17px;
-  color: rgba(255,255,255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   transition: color 450ms ease-in-out;
 }
-             
-.slider-item-container:hover > h2, .setting-btn:hover > h2 {
-  color: rgb(255,255,255);
+
+.slider-item-container:hover > h2,
+.setting-btn:hover > h2 {
+  color: rgb(255, 255, 255);
 }
