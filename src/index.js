@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //---------Spray sound properties--------------
   const spraySound = new Audio();
-  spraySound.src = "../dist/assets/spray_sound.mp3";
+  spraySound.src = "https://raw.githubusercontent.com/nateychau/graffiti_wall/main/dist/assets/spray_sound.mp3";
   spraySound.addEventListener('loadeddata', () => playSound = true);
 
   spraySound.loop = true;
@@ -84,6 +84,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
       toolbarOpen = true;
     }
   });
+
+  //------------ headshots ------------------------------
+  // const headshots = document.querySelectorAll('.headshot');
+  // let headshotHover
+  // headshots.forEach(headshot => {
+  //   headshot.addEventListener("mouseover", function () {
+  //     headshotHover = window.setInterval(() => {
+  //       headshot.classList.toggle("rotate");
+  //     }, 500);
+  //   })
+      
+  //     headshot.addEventListener("mouseout", function () {
+  //       headshot.classList.remove("rotate");
+  //       window.clearInterval(headshotHover);
+  //     })
+  // })
 
   //-----------Restart functionality-------------------
   const trashButton = document.getElementById("trash-btn");
