@@ -7199,7 +7199,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   var ctx = mainCanvas.getContext("2d"); //---------Spray sound properties--------------
 
   var spraySound = new Audio();
-  spraySound.src = "../dist/assets/spray_sound.mp3";
+  spraySound.src = "https://raw.githubusercontent.com/nateychau/graffiti_wall/main/dist/assets/spray_sound.mp3";
   spraySound.addEventListener('loadeddata', function () {
     return playSound = true;
   });
@@ -7252,7 +7252,21 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }, 850);
       toolbarOpen = true;
     }
-  }); //-----------Restart functionality-------------------
+  }); //------------ headshots ------------------------------
+  // const headshots = document.querySelectorAll('.headshot');
+  // let headshotHover
+  // headshots.forEach(headshot => {
+  //   headshot.addEventListener("mouseover", function () {
+  //     headshotHover = window.setInterval(() => {
+  //       headshot.classList.toggle("rotate");
+  //     }, 500);
+  //   })
+  //     headshot.addEventListener("mouseout", function () {
+  //       headshot.classList.remove("rotate");
+  //       window.clearInterval(headshotHover);
+  //     })
+  // })
+  //-----------Restart functionality-------------------
 
   var trashButton = document.getElementById("trash-btn");
   trashButton.addEventListener("click", function () {

@@ -55,3 +55,66 @@ body{
   border-radius: 3px;
 }
 
+.headshot{
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.headshot img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+  transition: all 250ms ease-in-out;
+}
+
+.headshot:hover{
+  opacity: 0.8;
+}
+
+.rotate-left:hover{
+  transform: rotate(5deg);
+}
+
+.rotate-right{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.rotate-right:hover{
+  transform: rotate(-5deg);
+}
+
+
+.title-div{
+  display: flex;
+  justify-content: space-between;
+  width: 1360px;
+}
+
+.headshot-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+}
+
+.github-container{
+  display: flex;
+  align-items: center;
+  width: 33%;
+  justify-content: center;
+}
+
+
+.github-container a{
+  font-size: 50px;
+  color: black;
+  position: relative;
+  left: -50px;
+}
+
+.github-container a:hover{
+  color: #5e5858;
+}
